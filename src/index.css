@@ -1,0 +1,197 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Recipe Finder Design System - Food-focused, modern, elegant */
+
+@layer base {
+  :root {
+    /* Core Backgrounds */
+    --background: 42 100% 98%;
+    --foreground: 25 25% 15%;
+
+    /* Card System */
+    --card: 0 0% 100%;
+    --card-foreground: 25 25% 15%;
+    --card-hover: 42 50% 96%;
+
+    /* Recipe Brand Colors */
+    --primary: 25 85% 55%;          /* Warm sunset orange */
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 35 100% 65%;    /* Lighter orange glow */
+    
+    --secondary: 140 40% 45%;        /* Fresh herb green */
+    --secondary-foreground: 0 0% 100%;
+    
+    --accent: 45 95% 60%;            /* Golden yellow */
+    --accent-foreground: 25 25% 15%;
+
+    /* UI Elements */
+    --muted: 42 30% 94%;
+    --muted-foreground: 25 15% 45%;
+    
+    --border: 42 20% 88%;
+    --input: 0 0% 100%;
+    --ring: 25 85% 55%;
+
+    /* Recipe-specific colors */
+    --recipe-warm: 20 80% 50%;       /* Paprika red */
+    --recipe-fresh: 120 60% 40%;     /* Basil green */
+    --recipe-neutral: 35 15% 85%;    /* Cream background */
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(var(--card-hover)));
+    --gradient-warm: linear-gradient(120deg, hsl(var(--recipe-warm)), hsl(var(--primary)));
+
+    /* Shadows */
+    --shadow-recipe: 0 10px 30px -10px hsl(var(--primary) / 0.2);
+    --shadow-elegant: 0 20px 40px -12px hsl(var(--foreground) / 0.08);
+    
+    /* Spacing */
+    --radius: 1rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+
+  /* Custom Recipe Animations */
+  @keyframes recipe-float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes recipe-glow {
+    0%, 100% { box-shadow: var(--shadow-recipe); }
+    50% { box-shadow: var(--shadow-elegant); }
+  }
+
+  @keyframes sweep-in {
+    0% { 
+      opacity: 0; 
+      transform: translateY(30px) scale(0.95); 
+    }
+    100% { 
+      opacity: 1; 
+      transform: translateY(0) scale(1); 
+    }
+  }
+
+  @keyframes hero-pulse {
+    0%, 100% { 
+      background: var(--gradient-hero);
+      transform: scale(1);
+    }
+    50% { 
+      background: var(--gradient-warm);
+      transform: scale(1.02);
+    }
+  }
+}
+
+@layer components {
+  /* Recipe-specific component styles */
+  .recipe-card {
+    @apply bg-card rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-[var(--shadow-recipe)] hover:-translate-y-2;
+  }
+
+  .recipe-card:hover {
+    @apply bg-[hsl(var(--card-hover))];
+  }
+
+  .recipe-hero {
+    background: var(--gradient-hero);
+    @apply text-primary-foreground;
+  }
+
+  .recipe-search {
+    @apply bg-input border border-border rounded-xl px-6 py-4 text-lg transition-all duration-200;
+    box-shadow: var(--shadow-elegant);
+  }
+
+  .recipe-search:focus {
+    @apply ring-2 ring-primary border-primary;
+    box-shadow: var(--shadow-recipe);
+  }
+
+  .recipe-filter {
+    @apply bg-muted text-muted-foreground px-4 py-2 rounded-full transition-all duration-200 hover:bg-primary hover:text-primary-foreground;
+  }
+
+  .recipe-filter.active {
+    @apply bg-primary text-primary-foreground;
+  }
+
+  .animation-sweep-in {
+    animation: sweep-in 0.6s ease-out forwards;
+  }
+
+  .animation-recipe-float {
+    animation: recipe-float 3s ease-in-out infinite;
+  }
+
+  .animation-hero-pulse {
+    animation: hero-pulse 4s ease-in-out infinite;
+  }
+}
